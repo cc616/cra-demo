@@ -12,6 +12,14 @@
   ],
   "extends": "airbnb",
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": [],
+      "specialLink": [],
+      "aspects": ["noHref", "invalidHref", "preferButton"]
+    }],
+  "import/no-unresolved": "off",
+  "import/extensions": "off",
+  "import/no-extraneous-dependencies": "off"
   }
 }

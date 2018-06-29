@@ -43,6 +43,8 @@
     "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "resolve": "1.6.0",
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^7.0.3",

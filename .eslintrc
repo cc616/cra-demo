@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "extends": "airbnb",
+  "rules": {
+    "semi": ["error", "never"]
+  }
+}

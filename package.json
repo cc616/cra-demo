@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.6.4",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
-    "babel-eslint": "7.2.3",
+    "babel-eslint": "8.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
+    "babel-plugin-import": "^1.8.0",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -15,18 +17,24 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "4.10.0",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "16.1.0",
     "eslint-config-react-app": "^2.1.0",
-    "eslint-loader": "1.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
+    "eslint-loader": "2.0.0",
+    "eslint-plugin-flowtype": "2.46.2",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.7.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
+    "husky": "^0.14.3",
     "jest": "20.0.4",
+    "less": "2.7.2",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^7.2.0",
+    "node-sass": "^4.9.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -36,6 +44,8 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
     "resolve": "1.6.0",
+    "resolve-url-loader": "^2.3.0",
+    "sass-loader": "^7.0.3",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -47,7 +57,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "precommit": "lint-staged"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -90,5 +101,11 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

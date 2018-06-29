@@ -144,7 +144,9 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              plugins: [
+                ['import', { libraryName: 'antd', style: true }],
+              ],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
@@ -184,6 +186,51 @@ module.exports = {
                       flexbox: 'no-2009',
                     }),
                   ],
+                },
+              },
+            ],
+          },
+          {
+            test: /\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'), // translates CSS into CommonJS
+                options: {
+                  sourceMap: true,
+                  importLoaders: 3,
+                },
+              },
+              require.resolve('resolve-url-loader'), // resolves relative paths in url() statements based on the original source file
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+              {
+                loader: require.resolve('sass-loader'),  // compiles Sass to CSS,
+                options: {
+                  includePaths: [`${paths.appNodeModules}/normalize-scss/sass`],
+                },
+              },
+            ],
+          },
+          {
+            test: /\.less$/,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('less-loader'),
+                options: {
+                  modifyVars: { '@primary-color': '#1890ff' },
                 },
               },
             ],

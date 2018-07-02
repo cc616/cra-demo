@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router'
 import { HashRouter, Switch } from 'react-router-dom'
-import DevTools from 'mobx-react-devtools'
-import { Provider } from 'mobx-react'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 
-import stores from 'stores'
+import rootReducer from 'reducers'
 
 import Home from 'routes/home'
 import About from 'routes/about'
@@ -21,17 +22,27 @@ const Routes = () => (
   </HashRouter>
 )
 
+const logger = store => next => (action) => {
+  console.log('dispatching', action)
+  const result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
+
+let composeEnhancers = compose
+if (process.env.NODE_ENV === 'development') {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;  // eslint-disable-line
+}
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunkMiddleware, logger)),
+)
+
 const App = () => (
-  <Fragment>
-    <Provider {...stores}>
-      <Routes />
-    </Provider>
-    {
-      process.env.NODE_ENV === 'development' ? (
-        <DevTools />
-      ) : null
-    }
-  </Fragment>
+  <Provider store={store}>
+    <Routes />
+  </Provider>
 )
 
 export default App

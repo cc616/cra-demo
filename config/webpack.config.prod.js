@@ -93,7 +93,9 @@ module.exports = {
 		  styles: paths.appStyles,
 		  routes: paths.appRoutes,
 		  components: paths.appComponents,
-      stores: paths.appStores,
+      actions: paths.appActions,
+      constants: paths.appConstants,
+      reducers: paths.appReducers,
 		  utils: paths.appUtils,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/

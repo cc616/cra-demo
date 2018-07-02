@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import { observer, inject } from 'mobx-react'
 import { Button } from 'antd'
+
+import { changeNumber } from 'actions/home'
 
 import './style.scss'
 
-@inject('homeStore')
-@observer
 class Home extends Component {
   static propTypes = {
-    homeStore: PropTypes.shape({}).isRequired,
+    number: PropTypes.number.isRequired,
+    changeNumber: PropTypes.func.isRequired,
+  }
+  handleIncrease = () => {
+    const { number } = this.props
+    const newNumber = number + 1
+
+    this.props.changeNumber(newNumber)
+  }
+  handleDecrease = () => {
+    const { number } = this.props
+    const newNumber = number - 1
+
+    this.props.changeNumber(newNumber)
   }
   render() {
-    const { homeStore } = this.props
-    const { number, increase, decrease } = homeStore
+    const { number } = this.props
 
     return (
       <div>
@@ -22,12 +35,20 @@ class Home extends Component {
         <Link to="/about">goto About</Link>
         <div>当前数：{number}</div>
         <div>
-          <Button className="btn" type="primary" onClick={increase}>增加</Button>
-          <Button type="primary" onClick={decrease}>减少</Button>
+          <Button className="btn" type="primary" onClick={this.handleIncrease}>增加</Button>
+          <Button type="primary" onClick={this.handleDecrease}>减少</Button>
         </div>
       </div>
     )
   }
 }
 
-export default Home
+const mapStateToProps = state => ({
+  number: state.home.number,
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeNumber: bindActionCreators(changeNumber, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

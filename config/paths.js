@@ -50,6 +50,7 @@ module.exports = {
   appStyles: resolveApp('src/styles'),
   appRoutes: resolveApp('src/routes'),
   appComponents: resolveApp('src/components'),
+  appStores: resolveApp('src/stores'),
   appUtils: resolveApp('src/utils'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),

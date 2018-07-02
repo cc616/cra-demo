@@ -86,7 +86,8 @@ module.exports = {
     alias: {
 		  styles: paths.appStyles,
 		  routes: paths.appRoutes,
-		  components: paths.appComponents,
+      components: paths.appComponents,
+      stores: paths.appStores,
 		  utils: paths.appUtils,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/

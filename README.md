@@ -20,5 +20,5 @@ yarn build
 
 #### 项目框架
 
-该项目使用的react+react-router+mobx+antd全家桶                                                       
-欢迎查看[docs](https://www.jianshu.com/p/2d54c2b3cfa3)
+该项目使用的react+react-router+redux+redux-thunk+antd全家桶                                                
+欢迎查看[docs](https://www.jianshu.com/p/9867d30afdb6)

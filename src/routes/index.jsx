@@ -2,13 +2,16 @@ import React from 'react'
 import { Route, Redirect } from 'react-router'
 import { HashRouter, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+
+import createSagaMiddleware from 'redux-saga'
 
 import rootReducer from 'reducers'
 
-import Home from 'routes/home'
+import { view as Home } from 'routes/home'
 import About from 'routes/about'
+
+import rootSaga from 'saga'
 
 const Routes = () => (
   <HashRouter>
@@ -22,22 +25,16 @@ const Routes = () => (
   </HashRouter>
 )
 
-const logger = store => next => (action) => {
-  console.log('dispatching', action)
-  const result = next(action)
-  console.log('next state', store.getState())
-  return result
-}
-
-let composeEnhancers = compose
-if (process.env.NODE_ENV === 'development') {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;  // eslint-disable-line
-}
-
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware()
+// mount it on the Store
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunkMiddleware, logger)),
+  applyMiddleware(sagaMiddleware),
 )
+
+// then run the saga
+sagaMiddleware.run(rootSaga)
 
 const App = () => (
   <Provider store={store}>

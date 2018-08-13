@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import home from './homeReducer'
+import { reducer as home } from 'routes/home'
 
 export default combineReducers({
   home,

@@ -93,8 +93,7 @@ module.exports = {
 		  styles: paths.appStyles,
 		  routes: paths.appRoutes,
 		  components: paths.appComponents,
-      actions: paths.appActions,
-      constants: paths.appConstants,
+      saga: paths.appSaga,
       reducers: paths.appReducers,
 		  utils: paths.appUtils,
       // Support React Native Web

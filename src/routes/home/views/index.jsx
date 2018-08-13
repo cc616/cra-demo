@@ -5,26 +5,28 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 import { Button } from 'antd'
 
-import { changeNumber } from 'actions/home'
+import * as actions from '../actions'
 
 import './style.scss'
 
 class Home extends Component {
   static propTypes = {
     number: PropTypes.number.isRequired,
-    changeNumber: PropTypes.func.isRequired,
+    actions: PropTypes.shape({
+      changeNumber: PropTypes.func.isRequired,
+    }).isRequired,
   }
   handleIncrease = () => {
     const { number } = this.props
     const newNumber = number + 1
 
-    this.props.changeNumber(newNumber)
+    this.props.actions.changeNumber(newNumber)
   }
   handleDecrease = () => {
     const { number } = this.props
     const newNumber = number - 1
 
-    this.props.changeNumber(newNumber)
+    this.props.actions.changeNumber(newNumber)
   }
   render() {
     const { number } = this.props
@@ -48,7 +50,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  changeNumber: bindActionCreators(changeNumber, dispatch),
+  actions: bindActionCreators(actions, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

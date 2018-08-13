@@ -1,4 +1,4 @@
-import constants from 'constants'
+import * as actionTypes from './actions'
 
 const initialState = {
   number: 0,
@@ -6,8 +6,9 @@ const initialState = {
 
 export default (state = initialState, action = { type: '', data: '' }) => {
   const { type, data } = action
+
   switch (type) {
-    case constants.CHANGE_NUMBER:
+    case actionTypes.CHANGE_NUMBER_RESULT.SUCCESS:
       return {
         ...state,
         number: data,

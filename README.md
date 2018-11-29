@@ -4,4 +4,4 @@
 
 * [`react-mobx`](https://github.com/cc616/cra-demo/tree/react-mobx)
 
-* [`react-saga`](https://github.com/cc616/cra-demo/tree/redux-saga)
+* [`react-saga`](https://github.com/cc616/cra-demo/tree/react-saga)

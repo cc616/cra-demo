@@ -1,7 +1,24 @@
-使用 [Create React App](https://github.com/facebookincubator/create-react-app)脚手架，分别接入三大数据状态管理
+该项目使用 [Create React App](https://github.com/facebookincubator/create-react-app)脚手架创建的。
 
-* [`react-redux`](https://github.com/cc616/cra-demo/tree/react-redux)
+#### 如何启动
+* start
+```
+npm start
+```
+ or
+```
+yarn start
+```
+* build
+```
+npm run build
+```
+ or
+```
+yarn build
+```
 
-* [`react-mobx`](https://github.com/cc616/cra-demo/tree/react-mobx)
+#### 项目框架
 
-* [`react-saga`](https://github.com/cc616/cra-demo/tree/react-saga)
+该项目使用的react+react-router+redux+redux-thunk+antd全家桶                                                
+欢迎查看[docs](https://www.jianshu.com/p/9867d30afdb6)

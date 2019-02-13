@@ -5,20 +5,20 @@ const fs = require('fs');
 const url = require('url');
 
 // Make sure any symlinks in the project folder are resolved:
-// https://github.com/facebook/create-react-app/issues/637
+// https://github.com/facebookincubator/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
-function ensureSlash(inputPath, needsSlash) {
-  const hasSlash = inputPath.endsWith('/');
+function ensureSlash(path, needsSlash) {
+  const hasSlash = path.endsWith('/');
   if (hasSlash && !needsSlash) {
-    return inputPath.substr(0, inputPath.length - 1);
+    return path.substr(path, path.length - 1);
   } else if (!hasSlash && needsSlash) {
-    return `${inputPath}/`;
+    return `${path}/`;
   } else {
-    return inputPath;
+    return path;
   }
 }
 
@@ -38,52 +38,25 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 
-const moduleFileExtensions = [
-  'web.mjs',
-  'mjs',
-  'web.js',
-  'js',
-  'web.ts',
-  'ts',
-  'web.tsx',
-  'tsx',
-  'json',
-  'web.jsx',
-  'jsx',
-];
-
-// Resolve file paths in the same order as webpack
-const resolveModule = (resolveFn, filePath) => {
-  const extension = moduleFileExtensions.find(extension =>
-    fs.existsSync(resolveFn(`${filePath}.${extension}`))
-  );
-
-  if (extension) {
-    return resolveFn(`${filePath}.${extension}`);
-  }
-
-  return resolveFn(`${filePath}.js`);
-};
-
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
-  appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appIndexJs: resolveApp('src/index.jsx'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
-  appTsConfig: resolveApp('tsconfig.json'),
+  appStyles: resolveApp('src/styles'),
+  appRoutes: resolveApp('src/routes'),
+  appComponents: resolveApp('src/components'),
+  appActions: resolveApp('src/actions'),
+  appConstants: resolveApp('src/constants'),
+  appReducers: resolveApp('src/reducers'),
+  appUtils: resolveApp('src/utils'),
   yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
-  proxySetup: resolveApp('src/setupProxy.js'),
+  testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
-
-
-
-module.exports.moduleFileExtensions = moduleFileExtensions;

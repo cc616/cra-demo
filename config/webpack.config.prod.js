@@ -221,6 +221,11 @@ module.exports = {
       .map(ext => `.${ext}`)
       .filter(ext => useTypeScript || !ext.includes('ts')),
     alias: {
+		  styles: paths.appStyles,
+		  routes: paths.appRoutes,
+      components: paths.appComponents,
+      stores: paths.appStores,
+		  utils: paths.appUtils,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -305,6 +310,7 @@ module.exports = {
                     },
                   },
                 ],
+                ['import', { libraryName: 'antd', style: true }],
               ],
               cacheDirectory: true,
               // Save disk space when time isn't as important
@@ -402,6 +408,19 @@ module.exports = {
               },
               'sass-loader'
             ),
+          },
+          {
+            test: /\.less$/,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('less-loader'),
+                options: {
+                  modifyVars: { '@primary-color': '#1890ff' },
+                },
+              },
+            ],
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.

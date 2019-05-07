@@ -147,6 +147,11 @@ module.exports = {
       .map(ext => `.${ext}`)
       .filter(ext => useTypeScript || !ext.includes('ts')),
     alias: {
+		  styles: paths.appStyles,
+		  routes: paths.appRoutes,
+      components: paths.appComponents,
+      stores: paths.appStores,
+		  utils: paths.appUtils,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -231,6 +236,13 @@ module.exports = {
                     },
                   },
                 ],
+                [
+                  "import",
+                  {
+                    "libraryName": "antd",
+                    "style": true
+                  }
+                ],
               ],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -312,6 +324,19 @@ module.exports = {
               },
               'sass-loader'
             ),
+          },
+          {
+            test: /\.less$/,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('less-loader'),
+                options: {
+                  modifyVars: { '@primary-color': '#1890ff' },
+                },
+              },
+            ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
